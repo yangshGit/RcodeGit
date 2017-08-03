@@ -15,6 +15,7 @@ ggplot(data=a,aes(x=b))+geom_density(bw='SJ')
 ggplot(data=a,aes(x=b))+geom_density(color="red",size=2,n=100,bw=0.1,show.legend = TRUE)
 #bandwith=0.1统计窗口为0.1，作图点的个数为100
 
+
 plot(a$a,a$b)
 qqplot(a$a,a$b)
 ############################################
