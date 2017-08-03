@@ -1,10 +1,58 @@
 getwd()
 setwd("E:/Rcode/RcodeGit");getwd()
+
+library(ggplot2)
 a=read.table("data/1.txt",header=TRUE)
 plot(a$a)
-plot(density(a$a))
+plot(density(a$a),lwd=2)
+plot(density(a$a,bw = 'SJ'),lwd=2)
+plot(density(a$a,bw = 'SJ',from = 0),lwd=2)
+plot(density(a$a,from = 0,bw = 0.1,n=100),lwd=2)
+plot(density(a$a,bw = "SJ")) #更敏感真实
+#密度曲线
+qplot(b,data=a,geom = "density",main = "density",bw="SJ")
+ggplot(data=a,aes(x=b))+geom_density(bw='SJ')
+ggplot(data=a,aes(x=b))+geom_density(color="red",size=2,n=100,bw=0.1,show.legend = TRUE)
+#bandwith=0.1统计窗口为0.1，作图点的个数为100
+
 plot(a$a,a$b)
 qqplot(a$a,a$b)
+############################################
+
+#readxls
+library(readxl)
+cyp<- read_excel("data/stat-test.xlsx",sheet = "统计详细", col_names = TRUE)
+View(cyp)
+plot(density(cyp$样本,na.rm=TRUE,bw=10,n=300,to=53000))
+plot(density(cyp$样本,na.rm=TRUE,bw=100,n=300,to=53000))
+#bw bandwidth统计带宽，n作图点个数，作图到X=100(bw越大，n越大，则越平滑)
+#真实的bw=bw的值*adjust
+
+plot(density(cyp$样本),lwd=6)
+library(ggplot2)
+qplot(样本,data=cyp,geom = "density",main = "density",lwd=6)
+ggplot(data=cyp,aes(x=样本))+geom_density(color="red",size=2)
+ggplot(data=cyp,aes(x=样本))+stat_density(color="red",size=2,n=100,bw=10)
+
+matplot(cyp$样本)
+?matplot
+####################################
+library(readxl)
+somatic<- read_excel("data/59717somatic.xlsx",sheet = "Mutation", col_names = TRUE)
+View(somatic)
+plot(density(somatic$xjratio),lwd=2)
+plot(density(somatic$xjratio,bw = 'SJ'),lwd=2)
+plot(density(somatic$xjratio,bw = 'SJ',from = 0),lwd=2)
+plot(density(somatic$xjratio,from = 0,bw = 0.01,n=100),lwd=2)
+plot(density(a$a,bw = "SJ")) #更敏感真实
+#密度曲线
+qplot(xjratio,data=somatic,geom = "density",main = "density",bw="SJ",color="red")
+ggplot(data=somatic,aes(x=xjratio))+geom_density(bw='SJ')
+ggplot(data=somatic,aes(x=xjratio))+geom_density(color="red",size=2,n=1000,bw=0.01,show.legend = TRUE)
+#bandwith=0.1统计窗口为0.1，作图点的个数为100
+
+
+#########################
 
 b=read.table("data/2.txt",header=TRUE)
 plot(b$POS)
@@ -15,17 +63,8 @@ c=read.table("data/3.vcf",header=TRUE)
 plot(c$POS)
 plot(density(c$POS))
 plot(c$CHROM,c$POS)
+########################
 
-#readxls
-library(readxl)
-cyp<- read_excel("data/stat-test.xlsx",sheet = "统计详细", col_names = TRUE)
-View(cyp)
-plot(density(cyp$样本,na.rm=TRUE,bw=10,n=300,to=53000))
-plot(density(cyp$样本,na.rm=TRUE,bw=100,n=300,to=53000))
-#bw bandwidth统计带宽，n作图点个数，作图到X=100
-
-matplot(cyp$样本)
-?matplot
 ##ggplot  http://www.17bigdata.com/%E7%94%A8%E4%BA%8E%E7%BB%98%E5%9B%BE%E7%9A%84r%E8%AF%AD%E8%A8%80%E6%89%A9%E5%B1%95%E5%8C%85%EF%BC%9Aggplot2.html
 #library(ggplot2)
 p <- ggplot(data=mpg,aes(x=displ,y=hwy,colour=factor(cyl)))
