@@ -19,7 +19,10 @@ plot(c$CHROM,c$POS)
 library(readxl)
 cyp<- read_excel("data/stat-test.xlsx",sheet = "统计详细", col_names = TRUE)
 View(cyp)
-plot(density(cyp$样本,na.rm = TRUE))
+plot(density(cyp$样本,na.rm=TRUE,bw=10,n=300,to=53000))
+plot(density(cyp$样本,na.rm=TRUE,bw=100,n=300,to=53000))
+#bw bandwidth统计带宽，n作图点个数，作图到X=100
+
 matplot(cyp$样本)
 ?matplot
 ##ggplot  http://www.17bigdata.com/%E7%94%A8%E4%BA%8E%E7%BB%98%E5%9B%BE%E7%9A%84r%E8%AF%AD%E8%A8%80%E6%89%A9%E5%B1%95%E5%8C%85%EF%BC%9Aggplot2.html
