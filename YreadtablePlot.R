@@ -46,9 +46,9 @@ plot(density(somatic$xjratio,bw = 'SJ',from = 0),lwd=2)
 plot(density(somatic$xjratio,from = 0,bw = 0.01,n=100),lwd=2)
 plot(density(a$a,bw = "SJ")) #更敏感真实
 #密度曲线
-qplot(xjratio,data=somatic,geom = "density",main = "density",bw="SJ",color="red")
-ggplot(data=somatic,aes(x=xjratio))+geom_density(bw='SJ')
-ggplot(data=somatic,aes(x=xjratio))+geom_density(color="red",size=2,n=1000,bw=0.01,show.legend = TRUE)
+qplot(xjratio,data=somatic,geom = "density",main = "density",bw="SJ",color="red")+xlim(-0.2,1.2)
+ggplot(data=somatic,aes(x=xjratio))+geom_density(bw='SJ')+xlim(-0.2,1.2)
+ggplot(data=somatic,aes(x=xjratio))+geom_density(color="red",size=2,n=1000,bw=0.01,show.legend = TRUE)+xlim(-0.2,1.2)
 #bandwith=0.1统计窗口为0.1，作图点的个数为100
 
 
