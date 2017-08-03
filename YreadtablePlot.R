@@ -15,6 +15,7 @@ c=read.table("data/3.vcf",header=TRUE)
 plot(c$POS)
 plot(density(c$POS))
 plot(c$CHROM,c$POS)
+
 #readxls
 library(readxl)
 cyp<- read_excel("data/stat-test.xlsx",sheet = "统计详细", col_names = TRUE)
